@@ -1137,7 +1137,7 @@
     <string name="crypt_keeper_encrypted_summary">Encrypted</string>
 
     <!-- Title for the preference for synchronizing encryption passwords to the screen unlock -->
-    <string name="crypt_keeper_syncronize_encryption_password">Syncronize Encryption Password</string>
+    <string name="crypt_keeper_syncronize_encryption_password_title">Syncronize Encryption Password</string>
 
     <!-- Summary for the preference for synchronizing encryption passwords to the screen unlock -->
     <string name="crypt_keeper_syncronize_encryption_password_summary">Keep the password for unlocking your screen and your encryption password the same</string>
