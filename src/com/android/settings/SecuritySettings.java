@@ -42,6 +42,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_RESET_CREDENTIALS = "reset_credentials";
     private static final String KEY_TOGGLE_INSTALL_APPLICATIONS = "toggle_install_applications";
     private static final String KEY_POWER_INSTANTLY_LOCKS = "power_button_instantly_locks";
+    private static final String KEY_SYNCHRONIZE_ENCRYPTION_PASSWORD = "synchronize_encryption_password";
 
     DevicePolicyManager mDPM;
 
@@ -52,6 +53,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private CheckBoxPreference mToggleAppInstallation;
     private DialogInterface mWarnInstallApps;
     private CheckBoxPreference mPowerButtonInstantlyLocks;
+    private CheckBoxPreference mSynchronizeEncryptionPassword;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -111,6 +113,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 KEY_TOGGLE_INSTALL_APPLICATIONS);
         mToggleAppInstallation.setChecked(isNonMarketAppsAllowed());
 
+        // Encryption password synchronization
+        mSynchronizeEncryptionPassword = (CheckBoxPreference) findPreference(
+                KEY_SYNCHRONIZE_ENCRYPTION_PASSWORD);
+        mSynchronizeEncryptionPassword.setChecked(isEncryptionPasswordSynchronized());
+
         return root;
     }
 
@@ -122,6 +129,17 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private void setNonMarketAppsAllowed(boolean enabled) {
         // Change the system setting
         Settings.Secure.putInt(getContentResolver(), Settings.Secure.INSTALL_NON_MARKET_APPS,
+                                enabled ? 1 : 0);
+    }
+
+    private boolean isEncryptionPasswordSynchronized() {
+        return Settings.Secure.getInt(getContentResolver(),
+                                      Settings.Secure.SYNCHRONIZE_ENCRYPTION_PASSWORD, 0) > 0;
+    }
+
+    private void setEncryptionPasswordSynchronized(boolean enabled) {
+        // Change the system setting
+        Settings.Secure.putInt(getContentResolver(), Settings.Secure.SYNCHRONIZE_ENCRYPTION_PASSWORD,
                                 enabled ? 1 : 0);
     }
 
@@ -198,6 +216,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
     }
 
     public boolean onPreferenceChange(Preference preference, Object value) {
+        if (preference == mSynchronizeEncryptionPassword) {
+            setEncryptionPasswordSynchronized((Boolean) value);
+            mSynchronizeEncryptionPassword.setChecked((Boolean) value);
+        }
+
         return true;
     }
 }
