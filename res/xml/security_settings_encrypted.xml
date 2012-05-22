@@ -26,8 +26,8 @@
             android:summary="@string/crypt_keeper_encrypted_summary" />
 
         <CheckBoxPreference android:key="synchronize_encryption_password"
-                android:title="@string/crypt_keeper_syncronize_encryption_password_title"
-                android:summary="@string/crypt_keeper_syncronize_encryption_password_summary"
+                android:title="@string/crypt_keeper_synchronize_encryption_password_title"
+                android:summary="@string/crypt_keeper_synchronize_encryption_password_summary"
                 android:persistent="false"/>
 
     </PreferenceCategory>
