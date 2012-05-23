@@ -200,8 +200,10 @@ public class SecuritySettings extends SettingsPreferenceFragment
             }
 
         } else if (preference == mSynchronizeEncryptionPassword) {
-            setEncryptionPasswordSynchronized((Boolean) value);
-            mSynchronizeEncryptionPassword.setChecked((Boolean) value);
+            Boolean value = mSynchronizeEncryptionPassword.isChecked();
+
+            setEncryptionPasswordSynchronized(value);
+            mSynchronizeEncryptionPassword.setChecked(value);
         } else {
             // If we didn't handle it, let preferences handle it.
             return super.onPreferenceTreeClick(preferenceScreen, preference);
