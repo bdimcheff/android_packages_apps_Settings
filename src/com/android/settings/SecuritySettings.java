@@ -134,7 +134,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     private boolean isEncryptionPasswordSynchronized() {
         return Settings.Secure.getInt(getContentResolver(),
-                                      Settings.Secure.SYNCHRONIZE_ENCRYPTION_PASSWORD, 0) > 0;
+                                      Settings.Secure.SYNCHRONIZE_ENCRYPTION_PASSWORD, 1) > 0;
     }
 
     private void setEncryptionPasswordSynchronized(boolean enabled) {
