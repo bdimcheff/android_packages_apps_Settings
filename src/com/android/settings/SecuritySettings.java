@@ -198,6 +198,10 @@ public class SecuritySettings extends SettingsPreferenceFragment
             } else {
                 setNonMarketAppsAllowed(false);
             }
+
+        } else if (preference == mSynchronizeEncryptionPassword) {
+            setEncryptionPasswordSynchronized((Boolean) value);
+            mSynchronizeEncryptionPassword.setChecked((Boolean) value);
         } else {
             // If we didn't handle it, let preferences handle it.
             return super.onPreferenceTreeClick(preferenceScreen, preference);
@@ -216,11 +220,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
     }
 
     public boolean onPreferenceChange(Preference preference, Object value) {
-        if (preference == mSynchronizeEncryptionPassword) {
-            setEncryptionPasswordSynchronized((Boolean) value);
-            mSynchronizeEncryptionPassword.setChecked((Boolean) value);
-        }
-
         return true;
     }
 }
