@@ -206,7 +206,9 @@ public class ChooseLockGeneric extends PreferenceActivity {
             int encryptionStatus = mDPM.getStorageEncryptionStatus();
             boolean encrypted = (encryptionStatus == DevicePolicyManager.ENCRYPTION_STATUS_ACTIVE)
                     || (encryptionStatus == DevicePolicyManager.ENCRYPTION_STATUS_ACTIVATING);
-            if (encrypted) {
+            LockPatternUtils lockPatternUtils = new LockPatternUtils(getActivity());
+
+            if (encrypted && lockPatternUtils.isEncryptionPasswordSynchronized()) {
                 if (quality < CryptKeeperSettings.MIN_PASSWORD_QUALITY) {
                     quality = CryptKeeperSettings.MIN_PASSWORD_QUALITY;
                 }
